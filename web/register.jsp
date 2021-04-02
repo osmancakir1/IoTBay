@@ -6,7 +6,7 @@
         <title>Registration Page</title>
     </head>
     <body>
-        <h1> Registration Form </h1>
+        <h1>Sign Up Form</h1>
         <form method="post" action="welcome.jsp">
             <table>
                 <tr><td><label for="email">Email:</label><br></td>
