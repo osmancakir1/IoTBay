@@ -33,10 +33,9 @@ input {
   border: none;
   border-radius: 4px;
   color: black;
-  padding: 15px 20px;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
   font-weight: bold;
   transition-duration: 0.4s;
@@ -44,4 +43,34 @@ input {
 
 .button:hover {
   background-color: #82b3c9;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.24),0 0px 0px 0 rgba(0,0,0,0.19);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #b3e5fc;
+}
+
+li {
+  float: left;
+  border-right: 1px solid #bbb;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #82b3c9;
+}
+
+li:last-child {
+  border-right: none;
 }

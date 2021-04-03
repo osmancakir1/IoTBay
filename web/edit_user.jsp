@@ -12,15 +12,14 @@
             User user = (User)session.getAttribute("user");
         %>
         
-        <h1>My Account</h1>
+        <h1>${user.username}'s Account</h1>
         <form method="post" action="edit_user.jsp">
             <table> 
-                <tr><td>Username</td><td><input type="text" name="username" value="${user.username}"></td></tr>
+                <tr><td>Username:</td><td><input type="text" name="username" value="${user.username}"></td></tr>
                 <tr><td>Email:</td><td><input type="text" name="email" value="${user.email}"></td></tr>
                 <tr><td>Password:</td><td><input type="text" name="password" value="${user.password}"></td></tr>
-                <tr><td><input class="button" type="submit" value="Update"></td><br>
-                    Click to return to <a href="index.jsp" class="button">Main</a> page 
-                </tr>
+                <tr><td><input class="button" type="submit" value="Update"></td></tr>
+                <tr><td><a href="index.jsp" class="button">Back</a></td></tr>
             </table>
         </form>
         <%

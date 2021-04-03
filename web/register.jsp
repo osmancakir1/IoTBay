@@ -16,7 +16,7 @@
                     <td><input type="text" id="username" name="username"><br></td></tr>
                 <tr><td><label for="text">Password:</label><br></td>
                     <td><input type="text" id="password" name="name"><br></td></tr>
-                <tr><td><input type="submit" value="Submit"></td></tr>
+                <tr><td><input class="button" type="submit" value="Submit"></td></tr>
             </table>
         </form>
     </body>

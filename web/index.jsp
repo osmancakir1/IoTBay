@@ -12,10 +12,12 @@
             if(!(session.getAttribute("user") == null)) {
                 User user = (User)session.getAttribute("user");
         %>
+         <ul>
+            <li><a href="edit_user.jsp">My Account</a></li>
+            <li style="float:right"><a href="logout.jsp">Logout</a></li>
+        </ul> 
+         
         <p> You are logged in as ${user.username} < ${user.email} > </p>
-        <a class="button" href="edit_user.jsp">My Account</a>
-        <a class="button" href="logout.jsp">Logout</a>
-
         <% } else { %>
         
         <h1>Welcome to the system</h1>
