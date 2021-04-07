@@ -10,14 +10,17 @@
         <h1>Sign Up Form</h1>
         <form method="post" action="welcome.jsp">
             <table>
-                <tr><td><label for="email">Email:</label><br></td>
-                    <td><input type="text" id="email" name="email"><br></td></tr>
-                <tr><td><label for="username">Username:</label><br></td>
-                    <td><input type="text" id="username" name="username"><br></td></tr>
-                <tr><td><label for="text">Password:</label><br></td>
-                    <td><input type="text" id="password" name="name"><br></td></tr>
-                <tr><td><input class="button" type="submit" value="Submit"></td></tr>
+                <tr><td>First name: </td><td><input type = "text" placeholder = "Enter first name: " name = "firstname" required = "true"></td></tr>
+                <tr><td>Last name: </td><td><input type = "text" placeholder = "Enter last name: " name = "lastname" required = "true"></td></tr>
+                <tr><td>EMAIL: </td><td><input type = "email" placeholder = "Enter your email: " name = "email" required></td></tr>
+                <tr><td>User name: </td><td><input type = "text" placeholder = "Choose a user name: " name = "username" required = "true"></td></tr>
+                <tr><td>PASSWORD: </td><td><input type = "password" placeholder = "Enter your password: " name = "password" required></td></tr>
+         
             </table>
+            <div>
+                <a class="button" href = "Main.jsp"> Cancel</a>
+                <input class="button" type = "submit" value = "Register">
+            </div>
         </form>
     </body>
 </html>
