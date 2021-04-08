@@ -12,9 +12,9 @@
             <table>
                 <tr><td>First name: </td><td><input type = "text" placeholder = "Enter first name: " name = "firstname" required = "true"></td></tr>
                 <tr><td>Last name: </td><td><input type = "text" placeholder = "Enter last name: " name = "lastname" required = "true"></td></tr>
-                <tr><td>EMAIL: </td><td><input type = "email" placeholder = "Enter your email: " name = "email" required></td></tr>
+                <tr><td>Email: </td><td><input type = "email" placeholder = "Enter your email: " name = "email" required></td></tr>
                 <tr><td>User name: </td><td><input type = "text" placeholder = "Choose a user name: " name = "username" required = "true"></td></tr>
-                <tr><td>PASSWORD: </td><td><input type = "password" placeholder = "Enter your password: " name = "password" required></td></tr>
+                <tr><td>Password: </td><td><input type = "password" placeholder = "Enter your password: " name = "password" required></td></tr>
          
             </table>
             <div>
