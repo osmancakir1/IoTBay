@@ -18,7 +18,7 @@
          
             </table>
             <div>
-                <a class="button" href = "Main.jsp"> Cancel</a>
+                <a class="button" href = "main.jsp"> Cancel</a>
                 <input class="button" type = "submit" value = "Register">
             </div>
         </form>
