@@ -15,7 +15,7 @@
     <body> 
             <h1>Welcome, <%=username%>!</h1>
             <h2>Your email is <%=email%></h2>
-            <a class="button" href="index.jsp"> Continue </a>
+            <a class="button" href="main.jsp"> Continue </a>
         <%
                User user = new User(email,username,password);
                session.setAttribute("user", user);
