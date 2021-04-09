@@ -18,8 +18,8 @@
                 <tr><td>Username:</td><td><input type="text" name="username" value="${user.username}"></td></tr>
                 <tr><td>Email:</td><td><input type="text" name="email" value="${user.email}"></td></tr>
                 <tr><td>Password:</td><td><input type="text" name="password" value="${user.password}"></td></tr>
-                <tr><td><input class="button" type="submit" value="Update"></td></tr>
-                <tr><td><a href="index.jsp" class="button">Back</a></td></tr>
+                <tr><td><input class="button" type="submit" value="Update"></td></tr> 
+                <tr><td><a href="main.jsp" class="button">Back</a></td></tr>
             </table>
         </form>
         <%

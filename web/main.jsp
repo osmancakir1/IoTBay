@@ -17,7 +17,7 @@
             <li style="float:right"><a href="logout.jsp">Logout</a></li>
         </ul> 
          
-        <p> You are logged in as ${user.name} < ${user.email} > </p>
+        <p> You are logged in as ${user.username} < ${user.email} > </p>
         <% } else { %>
         
         <h1>Welcome to the system</h1>
