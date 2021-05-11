@@ -9,6 +9,6 @@
     </head>
     <body>
         You have been logged out. Click <a class="button" href="main.jsp">Here</a> to return to the main page
-        <% session.invalidate(); %>
+        <% session.setAttribute("user", null); %>
     </body>
 </html>

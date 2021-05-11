@@ -7,14 +7,21 @@
         <title>Login Page</title>
     </head>
     <body>
+        <%
+            String existErr = (String) session.getAttribute("existErr");
+            String emailErr = (String) session.getAttribute("emailErr");
+            String passErr = (String) session.getAttribute("passErr");
+        %>
         <h1>Login</h1>
-        <form method="post" action="welcome.jsp">
+        <form method="post" action="LoginServlet">
             <table>
-                <tr><td><label for="name">Username:</label><br></td>
-                    <td><input type="text" id="name" name="name"><br></td></tr>
+                <tr><td><label for="email">email</label><br></td>
+                    <td><input type="text" id="email" name="email"><br></td></tr>
                 <tr><td><label for="password">Password:</label><br></td>
-                    <td><input type="text" id="password" name="name"><br></td></tr>
+                    <td><input type="text" id="password" name="password"><br></td></tr>
                 <tr><td><input type="submit" value="Submit"></td></tr>
+                <tr><td><a class="button" href="main.jsp">Cancel</a></td></tr>
+></td></tr>
             </table>
         </form>
     </body>

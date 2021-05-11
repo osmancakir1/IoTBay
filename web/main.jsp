@@ -11,18 +11,20 @@
         <%
             if(!(session.getAttribute("user") == null)) {
                 User user = (User)session.getAttribute("user");
+                System.out.println("username: "+user.getUsername());
         %>
          <ul>
             <li><a href="edit_user.jsp">My Account</a></li>
             <li style="float:right"><a href="logout.jsp">Logout</a></li>
         </ul> 
          
-        <p> You are logged in as ${user.username} < ${user.email} > </p>
+        <p> You are logged in as ${user.getUsername()} < ${user.getEmail()} > </p>
         <% } else { %>
         
-        <h1>Welcome to the system</h1>
+        <h1>Welcome to IOTBay</h1>
         <a class="button" href="register.jsp">Sign up</a>
-        <!-- <a class="button" href="Login.jsp">Login</a> -->
+        <a class="button" href="login.jsp">Login</a>
+        <jsp.include page="/ConnServlet" flush ="true"/>
         <% } %>
     </body>
 </html>

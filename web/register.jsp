@@ -22,5 +22,5 @@
                 <input class="button" type = "submit" value = "Register">
             </div>
         </form>
-    </body>
+</body>
 </html>
