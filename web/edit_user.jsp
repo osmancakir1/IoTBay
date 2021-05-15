@@ -4,7 +4,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="Style.css">
+        <style>
+             <%@ include file="Style.css"%>
+        </style>
         <title>Edit User</title>
     </head>
     <body>
@@ -16,7 +18,7 @@
         <tr><td><input class="button" type="submit" value="Update"></td></tr> 
         <tr><td><a href="main.jsp" class="button">Back</a></td></tr>
         <h2>Account Details</h2>
-        <button onclick="accountDetails()">Click to show/hide Account Details</button>
+        <button class="button" onclick="accountDetails()">Click to show/hide Account Details</button>
         <div id="accountDetails">
             <form method="post" action="edit_user.jsp">
                 <table> 
@@ -27,9 +29,8 @@
             </form>
         </div>
         <h2>Payment Details</h2>
-        <button onclick="paymentDetails()">Click to show/hide Payment Details</button>
+        <button class="button" onclick="paymentDetails()">Click to show/hide Payment Details</button>
         <div id="paymentDetails">
-
             <form method="post" action="edit_user.jsp">
                 <table> 
                     <tr><td>Name on Card:</td><td><input type="text" name="cardName" <!--value="${user.username}"-->></td></tr>
