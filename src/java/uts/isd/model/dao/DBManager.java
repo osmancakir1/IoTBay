@@ -4,7 +4,7 @@
  */
 package uts.isd.model.dao;
 
-import uts.isd.model.User;
+import uts.isd.model.*;
 import java.sql.*;
 
 /* 
@@ -33,6 +33,40 @@ public User findUser(String email, String password) throws SQLException {
    //add the results to a ResultSet       
    //search the ResultSet for a user using the parameters               
    return u;   
+}
+public Staff findStaff(String userID) throws SQLException{
+    String sql = "select * from staff where \"userid\"="+userID;
+    ResultSet rs=st.executeQuery(sql);
+    Staff staff = null;
+    if(rs.next()){
+        staff = new Staff(rs.getString(1), rs.getString(2), rs.getString(3)
+        , rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+    }
+    return staff;
+}
+public void addStaff(String email, String password, String firstname, 
+        String lastname, String othernames, String role) throws SQLException{
+    String sql = "select max(\"staffid\") from staff";
+    int staffID = 99999;
+    int userID = 99999;
+    ResultSet rs = st.executeQuery(sql);
+    if(rs.next()){
+        staffID = Integer.parseInt(rs.getString(1));
+    }
+    sql ="select max(\"userid\") from users";
+    rs = st.executeQuery(sql);
+    if(rs.next()){
+        userID = Integer.parseInt(rs.getString(1));
+    }
+    userID += 1;
+        sql = "insert into users (\"userid\", \"email\", \"password\") \nvalues ("
+                +userID+", \'"
+                +email+"\', \'"+password+"\')";
+        st.executeUpdate(sql);
+    staffID += 1;
+        sql = "insert into staff (\"staffid\", \"userid\", \"firstname\", \"lastname\", \"othernames\", \"role\", \"email\")\nvalues("
+                +staffID+", "+userID+", \'"+ firstname+ "\', \'"+lastname+"\', \'"+othernames+"\', \'"+role+"\', \'"+email+"\')";
+        st.executeUpdate(sql);
 }
 
 //Add a user-data into the database   

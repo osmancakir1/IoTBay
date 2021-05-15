@@ -18,8 +18,8 @@ public class TestDB {
             DBConnector connector = new DBConnector();
             Connection conn = connector.openConnection();
             DBManager db = new DBManager(conn);
-            System.out.println("Test no:");
-            String test = in.nextLine();
+            System.out.println("Test:");
+            String test = "addstaff";//in.nextLine();
             System.out.println();
             if(test.equals("add")){
                 System.out.print("User email: ");
@@ -51,6 +51,19 @@ public class TestDB {
                 String email = in.nextLine();
                 Validator v = new Validator();
                 System.out.println(v.validateEmail(email));
+            }else if(test.equals("findstaff")){
+                System.out.println("ID: ");
+                String userID = in.nextLine();
+                
+                Staff staff = db.findStaff(userID);
+                if(staff!=null){
+                    System.out.println("staff found: "+staff.getEmail());
+                }else{
+                    System.out.println("staff not found");
+                }
+            }else if(test.equals("addstaff")){
+                System.out.println("adding staff Jim Bob Jones sales");
+                db.addStaff("jimbob@mail.com", "abc123", "Jim", "Jones", "Bob", "sales");
             }
             
             

@@ -1,4 +1,5 @@
 <%@page import="uts.isd.model.User"%>
+<%@page import="uts.isd.model.Staff"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,17 @@
         <%
             if(!(session.getAttribute("user") == null)) {
                 User user = (User)session.getAttribute("user");
-                System.out.println("username: "+user.getUsername());
+                if(session.getAttribute("usertype").equals("staff")){
+                    Staff staff = (Staff)session.getAttribute("staff");
+                    %>
+                    <p> Staff Login as ${staff.getRole()} ${staff.getFirstname()}
+                       <a href="logout.jsp">Logout</a>
+                    <%
+                        if(staff.getRole().equals("sysadmin")){
+                            %><a href="SysAdminCreateUser.jsp">Create user><%
+                        }
+                    %>
+                <%}else{
         %>
         <ul>
             <li><a href="edit_user.jsp">My Account</a></li>
@@ -20,7 +31,8 @@
         </ul> 
          
         <p> You are logged in as ${user.getUsername()} < ${user.getEmail()} > </p>
-        <% } else { %>
+        <%       }
+        } else { %>
         
         <h1>Welcome to IOTBay</h1>
         <a class="button" href="register.jsp">Sign up</a>

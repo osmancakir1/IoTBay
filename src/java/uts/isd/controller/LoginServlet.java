@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import uts.isd.model.User;
+import uts.isd.model.*;
 import uts.isd.model.dao.DBManager;
 
      public class LoginServlet extends HttpServlet {
@@ -48,7 +48,19 @@ import uts.isd.model.dao.DBManager;
                } else if (user != null) {
                    System.out.println("user found");
                    session.setAttribute("user", user);
-                      //13-save the logged in user object to the session           
+                   Staff staff = null;
+                   try{
+                       staff = manager.findStaff(user.getUsername());
+                   }catch(SQLException ex){
+                       Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex); 
+                   }
+                   if(staff != null){
+                       session.setAttribute("usertype", "staff");
+                       session.setAttribute("staff", staff);
+                   }else{
+                       session.setAttribute("usertype", "customer");
+                   }
+                   //13-save the logged in user object to the session           
                    request.getRequestDispatcher("main.jsp").include(request, response);//14- redirect user to the main.jsp     
                } else {
                    System.out.println("user not found error");

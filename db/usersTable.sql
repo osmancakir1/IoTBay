@@ -35,7 +35,7 @@ create table staff(
 "email" varchar(30)
 );
 insert into users ("userid", "email", "password")
-values(0, 'johnsmith@iotbay.com', 'asdf');
+values(0, 'sysadmin@iotbay.com', 'asdf');
 
 insert into staff("staffid", "userid", "firstname", "lastname", "othernames", "role", "email")
-values(0, 0, 'John', 'Smith', '','sysadmin','johnsmith@itobay.com');
+values(0, 0, 'sysadmin','', '','sysadmin','sysadmin@iotbay.com');

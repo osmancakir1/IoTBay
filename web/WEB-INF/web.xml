@@ -9,6 +9,10 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>uts.isd.controller.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateUserServlet</servlet-name>
+        <servlet-class>uts.isd.controller.CreateUserServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/</url-pattern>
@@ -16,6 +20,10 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateUserServlet</servlet-name>
+        <url-pattern>/CreateUserServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
