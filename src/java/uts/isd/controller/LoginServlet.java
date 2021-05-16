@@ -18,8 +18,10 @@ import uts.isd.model.dao.DBConnector;
 import uts.isd.model.dao.DBManager;
 
     public class LoginServlet extends HttpServlet {
+        
     @Override   
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {  
         
         HttpSession session = request.getSession();
         Validator validator = new Validator();
@@ -27,7 +29,7 @@ import uts.isd.model.dao.DBManager;
         
         String email = request.getParameter("email");
         if (email == null || !validator.validateEmail(email)) {
-            session.setAttribute("InvalidLogin", "The email address you have entered is invalid!");
+            session.setAttribute("loginErr", "The email address you have entered is invalid!");
             dispatcher.include(request, response);
             return;
         }
@@ -39,7 +41,7 @@ import uts.isd.model.dao.DBManager;
         if (manager == null) {
            try {
                manager = new DBManager((new DBConnector()).openConnection());
-               session.setAttribute("dbmanager", manager);
+               session.setAttribute("manager", manager);
            } catch (Exception e) {
                //Unspecified error occurred
                return;
@@ -47,34 +49,26 @@ import uts.isd.model.dao.DBManager;
 
         }
         User user = null;
-        
-        validator.clear(session);
-
-        if (!validator.validateEmail(email)) {
-            session.setAttribute("emailErr", "Error: Email format incorrect");
+        try {
+            user = manager.findUser(email, password);
+        } catch (SQLException ex) {
+            // database error
+        } catch (Exception e) {
+            // some error
+        }
+        if (user == null) {
+            //invalid credentials
+            session.setAttribute("loginErr", "User does not exist in the Database!");
             request.getRequestDispatcher("login.jsp").include(request, response);
-        } else if (!validator.validatePassword(password)) {
-            session.setAttribute("passErr", "Error: Password format incorrect");
-            request.getRequestDispatcher("login.jsp").include(request, response);
+            return;
+        } 
+        if (user != null) {
+            session.setAttribute("user", user);
+            session.setAttribute("loginErr", null);
+            request.getRequestDispatcher("welcome.jsp").forward(request, response);
         } else {
-            try {
-                user = manager.findUser(email,password);
-            } catch (SQLException ex) {
-                // database error
-            } catch (Exception e) {
-                // some error
-            }
-            if (user == null) {
-                //invalid credentials
-                session.setAttribute("existErr", "User does not exist in the Database!");
-                request.getRequestDispatcher("login.jsp").include(request, response);
-                return;
-            } else {
-                    if (user != null) {
-                        session.setAttribute("user", user);
-                    }
-                    request.getRequestDispatcher("welcome.jsp").include(request, response);
-            }
+            session.setAttribute("loginErr", "An unspecified error has occured");
+            dispatcher.include(request, response);
         }
     }
 }

@@ -10,21 +10,32 @@
     </head>
     <body>
         <%
-            String existErr = (String) session.getAttribute("existErr");
-            String emailErr = (String) session.getAttribute("emailErr");
-            String passErr = (String) session.getAttribute("passErr");
+            String loginErr = (String) session.getAttribute("loginErr");
         %>
-        <h1>Login <span class="message"> <%=(existErr != null ? existErr : "")%></span></h1>
+        <h1>Login</h1>
         <form method="post" action="LoginServlet">
+            <%
+                if(loginErr != null) {
+            %>
+            <td><span style="color:red"><%=loginErr%></span></td>
+            <% } %>
             <table>
                 <tr>
-                    <td><label for="email">Email:</label><br></td>
-                    <td><input type="text" placeholder="<%=(emailErr != null ? emailErr : "Enter email")%>" id="email" name="email"><br></td></tr>
-                <tr><td><label for="password">Password:</label><br></td>
-                    <td><input type="password" placeholder="<%=(passErr != null ? passErr : "Enter password")%>"  id="password" name="password"><br></td></tr>
-                <tr><td><input type="submit" value="Submit"></td></tr>
-                <tr><td><a class="button" href="main.jsp">Cancel</a></td></tr>
-></td></tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input type="email" name="email" placeholder="JohnSmith@gmail.com" required></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input type="password" name="password" placeholder="Password" required></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><center>
+                    <input type="hidden" name="origin"  value="login">
+                    <input class="button" type ="submit" value="Login" required>
+                </center>
+                </td>
+                </tr>
             </table>
         </form>
     </body>
