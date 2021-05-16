@@ -4,29 +4,22 @@
  * and open the template in the editor.
  */
 package uts.isd.model.dao;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 /**
  *
- * @author Lewis
+ * @author osman hendy and sol ot3
  */
-public class DBConnector extends DB {
-
+public class DBConnector extends DB{
     public DBConnector() throws ClassNotFoundException, SQLException {
-//        Class.forName(driver);
-//        conn = DriverManager.getConnection(URL+db, dbuser, dbpass);
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        conn = DriverManager.getConnection(URL, userID, password);
+        Class.forName(driver);
+        super.conn = DriverManager.getConnection(URL+db, dbuser, dbpass);
     }
-
-    public Connection openConnection() {
-        return this.conn;
+    public Connection openConnection(){
+        return super.conn;
     }
-
-    public void closeConnection() throws SQLException {
-        this.conn.close();
+    public void closeConnection() throws SQLException{
+        super.conn.close();
     }
 }
