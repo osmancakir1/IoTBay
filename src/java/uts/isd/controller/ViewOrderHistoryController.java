@@ -21,7 +21,7 @@ import uts.isd.model.dao.DBManager;
 
 /**
  *
- * @author mapso
+ * @author soleane
  */
 public class ViewOrderHistoryController extends HttpServlet {
 
