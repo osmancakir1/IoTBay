@@ -8,21 +8,14 @@ import java.sql.Connection;
 
 /**
  *
- * @author Lewis
+ * @author Osman hendy and sol ot3
  */
 public abstract class DB {
-//    protected String URL = "jdbc:derby://localhost:1527/";
-//    protected String db = "assignmentDB";
-//    protected String dbuser = "ISD";
-//    protected String dbpass = "asdf";
-//    protected String driver = "org.apache.derby.jdbc.ClientDriver";
+    protected String URL = "jdbc:derby://localhost:1527/";
+    protected String db = "assignmentDB";
+    protected String dbuser = "ISDUSER";
+    protected String dbpass = "123";
+    protected String driver = "org.apache.derby.jdbc.ClientDriver";
     protected Connection conn;
     
-    
-    protected final String serverName = "localhost";
-    protected final String dbName = "assignmentDB";
-    protected final String portNumber = "1433";
-    protected final String userID = "sa";
-    protected final String password = "123456";
-    protected final String URL = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName;
 }
