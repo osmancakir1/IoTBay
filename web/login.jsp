@@ -14,7 +14,7 @@
             String emailErr = (String) session.getAttribute("emailErr");
             String passErr = (String) session.getAttribute("passErr");
         %>
-        <h1>Login</h1>
+        <h1>Login <span class="message"> <%=(existErr != null ? existErr : "")%></span></h1>
         <form method="post" action="LoginServlet">
             <table>
                 <tr>
