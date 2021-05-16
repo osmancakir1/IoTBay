@@ -1,63 +1,147 @@
-//package uts.isd.controller;
-//
-///**
-// *
-// * @author Lewis
-// */
-//import uts.isd.controller.*;
-//import uts.isd.model.dao.*;
-//import uts.isd.model.*;
-//import java.sql.*;
-//import java.util.*;
-//import java.util.logging.*;
-//
-//public class TestDB {
-//    private static Scanner in = new Scanner(System.in);
-//    public static void main(String[] args) {
-//        try {
-//            DBConnector connector = new DBConnector();
-//            Connection conn = connector.openConnection();
-//            DBManager db = new DBManager(conn);
-//            System.out.println("Test no:");
-//            String test = in.nextLine();
-//            System.out.println();
-//            if(test.equals("add")){
-//                System.out.print("User email: ");
-//                String email = in.nextLine();
-//                int userId = Integer.parseInt(email);
-//                System.out.print("User name: ");
-//                String name = in.nextLine();
-//                System.out.print("User password: ");
-//                String password = in.nextLine();
-//                db.addUser(userId, name, password);
-//                System.out.println("User is added to the database.");
-//            }else if(test.equals("find")){
-//                System.out.println("Email: ");
-//                String email = in.nextLine();
-//                System.out.println("Password: ");
-//                String password = in.nextLine();
-//                User u = db.findUser(email, password);
-//                if(u!=null){
-//                    System.out.println("User: "+u.getUsername()+" found.");
-//                }else{
-//                    System.out.println("User not found");
-//                }
-//            }else if(test.equals("delete")){
-//                System.out.println("Email: ");
-//                String email = in.nextLine();
-//                db.deleteUser(email);
-//                System.out.println("User Deleted");
-//            }else if(test.equals("validate email")){
-//                System.out.println("Email: ");
-//                String email = in.nextLine();
-//                Validator v = new Validator();
-//                System.out.println(v.validateEmail(email));
-//            }
-//            
-//            
-//            connector.closeConnection();
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//}
+package uts.isd.controller;
+
+/**
+ *
+ * @author osman hendy sol ot3
+ */
+import uts.isd.controller.*;
+import uts.isd.model.dao.*;
+import uts.isd.model.*;
+import java.sql.*;
+import java.util.*;
+import java.util.logging.*;
+
+public class TestDB {
+    
+    private static Scanner in = new Scanner(System.in);
+    private DBConnector connector;
+    private Connection conn;
+    private DBManager db;
+    
+    public static void main(String[] args) throws SQLException {
+        (new TestDB()).runQueries();
+    }
+    
+    public TestDB() {
+        try {
+            connector = new DBConnector();
+            conn = connector.openConnection();
+            db = new DBManager(conn);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private char readChoice() {
+        System.out.print("Operation CRUDS or * to exit: ");
+        return in.nextLine().charAt(0);
+    }
+    
+    private void runQueries() throws SQLException {
+        char c;
+        
+        while ((c = readChoice()) != '*') {
+            switch (c) {
+                case 'C':
+                    testAdd();
+                    break;
+                case 'R':
+                    testRead();
+                    break;
+                case 'U':
+                    testUpdate();
+                    break;
+                case 'D':
+                    testDelete();
+                    break;
+                case 'S':
+                    showAll();
+                    break;
+                default:
+                    System.out.println("Unknown command");
+                    break;
+            }
+        }
+    }
+    
+    private void testAdd() {
+        System.out.print("User email: ");
+        String email = in.nextLine();
+        System.out.print("User name: ");
+        String name = in.nextLine();
+        System.out.print("User password: ");
+        String password = in.nextLine();
+        System.out.print("User phone: ");
+        String phone = in.nextLine();
+        try {
+            db.addUser(email, name, password, phone);
+        } catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("User added to the database.");
+    }
+    
+    private void testRead() throws SQLException {
+        System.out.print("User email: ");
+        String email = in.nextLine();
+        System.out.print("User password: ");
+        String password = in.nextLine();
+        User user = db.findUser(email, password);
+        if (user != null) {
+            System.out.println("User " + user.getName() + " exists in the database.");
+        } else {
+            System.out.println("User does not exist!");
+        }
+    }
+    
+    private void testUpdate() {
+        System.out.print("User email: ");
+        String email = in.nextLine();
+        System.out.print("User password: ");
+        String password = in.nextLine();
+        
+        try {
+            if (db.checkUser(email, password)) {
+                System.out.print("User name: ");
+                String name = in.nextLine();
+                System.out.print("User phone: ");
+                String phone = in.nextLine();
+                db.updateUser(email, name, password, phone);
+            } else {
+                System.out.println("User does not exist mate");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void testDelete() {
+        System.out.print("User email: ");
+        String email = in.nextLine();
+        System.out.print("User password: ");
+        String password = in.nextLine();
+        
+        try {
+            if (db.checkUser(email, password)) {
+                db.deleteUser(email);
+            } else {
+                System.out.println("User isn't in the database buddy");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void showAll() {
+        try {
+            ArrayList<User> users = db.fetchUsers();
+            System.out.println("USERS TABLE: ");
+            users.stream().forEach((user) -> {
+                System.out.printf("%-20s %-30s &-20s &-10s \n", user.getEmail(), user.getName(), user.getPassword(), user.getPhone());
+            });
+        } catch (SQLException ex) {
+            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}
+    
