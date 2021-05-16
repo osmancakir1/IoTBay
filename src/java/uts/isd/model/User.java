@@ -12,7 +12,7 @@ public class User implements Serializable {
         this.email = email;
         this.name = name;
         this.password = password;
-        this.name = phone; 
+        this.phone = phone; 
     }
 
     public String getEmail() {

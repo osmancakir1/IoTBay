@@ -35,7 +35,7 @@ import uts.isd.model.dao.DBManager;
         }
         
         String password = request.getParameter("password");
-//        String user = request.getParameter("user");
+
              
         DBManager manager = (DBManager) session.getAttribute("manager");
         if (manager == null) {

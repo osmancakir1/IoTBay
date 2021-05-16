@@ -10,18 +10,11 @@
         <title>Welcome Page</title>
     </head>
         <%
-            String name = request.getParameter("name");
-            String email = request.getParameter("email");
-            String password = request.getParameter("password"); 
-            String phone = request.getParameter("phone");
+            User user = (User) session.getAttribute("user");
         %>
     <body> 
-            <h1>Welcome, <%=name%>!</h1>
-            <h2>Your email is <%=email%></h2>
+            <h1>Welcome, ${user.name}!</h1>
+            <h2>Your email is ${user.email}></h2>
             <a class="button" href="main.jsp"> Continue </a>
-        <%
-               User user = new User(email, name, password, phone);
-               session.setAttribute("user", user);
-        %>
     </body>
 </html>

@@ -11,10 +11,14 @@
     </head>
     <body>
         <%
+            String name = "";
+            String email = "";
+            String password = "";
+            
             User user = (User)session.getAttribute("user");
-            String name = user.getName();
-            String email = user.getEmail();
-            String password = user.getPassword();
+            name = user.getName();
+            email = user.getEmail();
+            password = user.getPassword();
             String phone = user.getPhone();
         %>
         
