@@ -22,4 +22,5 @@ public class DBConnector extends DB{
     public void closeConnection() throws SQLException{
         super.conn.close();
     }
+    //irrelevant comment
 }

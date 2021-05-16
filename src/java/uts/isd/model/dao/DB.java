@@ -17,5 +17,5 @@ public abstract class DB {
     protected String dbpass = "123";
     protected String driver = "org.apache.derby.jdbc.ClientDriver";
     protected Connection conn;
-    
+    //irrelevant comment
 }
