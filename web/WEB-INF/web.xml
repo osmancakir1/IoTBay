@@ -25,6 +25,16 @@
         <servlet-name>CreateUserServlet</servlet-name>
         <url-pattern>/CreateUserServlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>uts.isd.controller.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

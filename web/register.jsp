@@ -1,5 +1,3 @@
-<%@page import="uts.isd.model.User"%>
-<%@page import="uts.isd.model.Staff"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,25 +6,29 @@
         <style>
              <%@ include file="Style.css"%>
         </style>
-        <title>Index</title>
+        <title>Registration Page</title>
     </head>
     <body>
         <%
-            if(!(session.getAttribute("user") == null)) {
-                User user = (User)session.getAttribute("user");
+            String existErr = (String) session.getAttribute("existErr");
+            String emailErr = (String) session.getAttribute("emailErr");
+            String passErr = (String) session.getAttribute("passErr");
+            String nameErr = (String) session.getAttribute("nameErr");
+            String phoneErr = (String) session.getAttribute("phoneErr");
         %>
-        <ul>
-            <li><a href="edit_user.jsp">My Account</a></li>
-            <li><a href="order_history.jsp">View Order History</a></li>
-            <li style="float:right"><a href="logout.jsp">Logout</a></li>
-        </ul> 
+        <h1>Sign Up Form</h1>
+        <form method="post" action="RegisterServlet">
+            <table>
+                <tr><td>Email: </td><td><input type = "email" placeholder="<%=(emailErr != null ? emailErr : "Enter your email")%>" name ="email" required ></td></tr>
+                <tr><td>Name: </td><td><input type = "text" placeholder="<%=(nameErr != null ? nameErr : "Enter first name")%>" name = "name" required = "true"></td></tr>
+                <tr><td>Password: </td><td><input type = "password" placeholder="<%=(passErr != null ? passErr : "Enter your password")%>" name = "password" required = "true"></td></tr>
+                <tr><td>Phone: </td><td><input type = "text" placeholder="<%=(phoneErr != null ? phoneErr : "Enter phone number")%>" name = "phone" required = "true"></td></tr>
          
-        <p> You are logged in as ${user.getName()} < ${user.getEmail()} > </p>
-        <% } else { %>
-        <h1>Welcome to IOTBay</h1>
-        <a class="button" href="register.jsp">Sign up</a>
-        <a class="button" href="login.jsp">Login</a>
-        <jsp.include page="/ConnServlet" flush ="true"/>
-        <% } %>
-    </body>
+            </table>
+            <div>
+                <button class="button" href = "main.jsp"> Cancel</button>
+                <input class="button" type = "submit" value = "Register">
+            </div>
+        </form>
+</body>
 </html>

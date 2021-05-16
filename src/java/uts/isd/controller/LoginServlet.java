@@ -7,25 +7,45 @@ package uts.isd.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import uts.isd.model.*;
+import uts.isd.model.dao.DBConnector;
 import uts.isd.model.dao.DBManager;
 
     public class LoginServlet extends HttpServlet {
     @Override   
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {       
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {  
+        
         HttpSession session = request.getSession();
         Validator validator = new Validator();
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+        
         String email = request.getParameter("email");
+        if (email == null || !validator.validateEmail(email)) {
+            session.setAttribute("InvalidLogin", "The email address you have entered is invalid!");
+            dispatcher.include(request, response);
+            return;
+        }
+        
         String password = request.getParameter("password");
+//        String user = request.getParameter("user");
              
         DBManager manager = (DBManager) session.getAttribute("manager");
+        if (manager == null) {
+           try {
+               manager = new DBManager((new DBConnector()).openConnection());
+               session.setAttribute("dbmanager", manager);
+           } catch (Exception e) {
+               //Unspecified error occurred
+               return;
+           }
+
+        }
         User user = null;
         
         validator.clear(session);
@@ -38,24 +58,25 @@ import uts.isd.model.dao.DBManager;
             request.getRequestDispatcher("login.jsp").include(request, response);
         } else {
             try {
-                user = manager.findUser(email, password);
-                System.out.println(user != null ? "user  exists" : "no user");
-                if (user == null) {
-                    session.setAttribute("existErr", "User does not exist in the Database!");
-                    request.getRequestDispatcher("login.jsp").include(request, response);
-                } else {
+                user = manager.findUser(email,password);
+            } catch (SQLException ex) {
+                // database error
+            } catch (Exception e) {
+                // some error
+            }
+            if (user == null) {
+                //invalid credentials
+                session.setAttribute("existErr", "User does not exist in the Database!");
+                request.getRequestDispatcher("login.jsp").include(request, response);
+                return;
+            } else {
                     if (user != null) {
                         session.setAttribute("user", user);
                     }
                     request.getRequestDispatcher("welcome.jsp").include(request, response);
-                }
-            } catch (SQLException | NullPointerException ex) {
-                System.out.println(ex.getMessage() == null ? "User does not exist" : "welcome");
-                session.setAttribute("existErr", "User does not exist in the Database!");
-                request.getRequestDispatcher("login.jsp").include(request, response);
-             }
-         }
-
+            }
+        }
+    }
 }
+    
 
-}

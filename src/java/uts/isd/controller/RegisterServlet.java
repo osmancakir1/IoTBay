@@ -35,7 +35,6 @@ public class RegisterServlet extends HttpServlet {
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         
-        DBManager manager = (DBManager) session.getAttribute("manager");
         validator.clear(session);
          
         if (!validator.validateEmail(email)) {
@@ -48,20 +47,30 @@ public class RegisterServlet extends HttpServlet {
             session.setAttribute("passErr", "Error: Password format incorrect");
             request.getRequestDispatcher("register.jsp").include(request, response);
         } else {
-            try {
-                User exist = manager.findUser(email, password);
-                if (exist != null) {
-                    session.setAttribute("existErr", "User already in the Database!");
-                    request.getRequestDispatcher("register.jsp").include(request, response);
-                } else {
-                    manager.addUser(email, password, name, phone);
-                    User user = new User(email, password, name, phone);
-                    session.setAttribute("user", user);
-                    request.getRequestDispatcher("main.jsp").include(request, response);
+                DBManager manager = (DBManager) session.getAttribute("manager");
+                if (manager == null) {
+                        try {
+                            manager = new DBManager((new DBConnector()).openConnection());
+                        } catch (Exception e) {
+                            request.getRequestDispatcher("register.jsp").include(request, response);
+                            return;
+                        }
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    User exist = manager.findUser(email, password);
+                    if (exist != null) {
+                        session.setAttribute("existErr", "User already in the Database!");
+                        request.getRequestDispatcher("register.jsp").include(request, response);
+                    } else {
+
+                        manager.addUser(email, name, password, phone);
+                        User user = new User(email, name, password, phone);
+                        session.setAttribute("user", user);
+                        request.getRequestDispatcher("main.jsp").include(request, response);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
         }
     }
     
