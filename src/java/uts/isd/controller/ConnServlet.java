@@ -39,19 +39,19 @@ public class ConnServlet extends HttpServlet {
     @Override //Add the DBConnector, DBManager, Connection instances to the session
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException{
-       System.out.println("connservlet doGet ok");
-       response.setContentType("text/html;charset=UTF-8");
-       HttpSession session = request.getSession();
-       conn = db.openConnection();
-       try {
-           manager = new DBManager(conn);
-       } catch (SQLException ex) {
-           Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
-       }
-       //export the DB manager to the view-session (JSPs)
-       if(session.getAttribute("manager")==null){
-           session.setAttribute("manager", manager);
-       }
+//       System.out.println("connservlet doGet ok");
+//       response.setContentType("text/html;charset=UTF-8");
+//       HttpSession session = request.getSession();
+//       conn = db.openConnection();
+//       try {
+//           manager = new DBManager(conn);
+//       } catch (SQLException ex) {
+//           Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
+//       }
+//       //export the DB manager to the view-session (JSPs)
+//       if(session.getAttribute("manager")==null){
+//           session.setAttribute("manager", manager);
+//       }
        response.sendRedirect("main.jsp");
     }
     @Override //Destroy the servlet and release the resources of the application (terminate also the db connection)

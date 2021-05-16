@@ -34,5 +34,17 @@
 
    public boolean validatePassword(String password){
       return validate(passwordPattern,password); 
-   }          
+   }     
+   
+   public static boolean validateInteger(String input, int min, int max){
+       try {
+           int n = Integer.parseInt(input);
+           if (n < min || n > max) {
+               throw new Exception();
+           }
+       } catch (Exception e) {
+           return false;
+       }
+       return true;
+   }
 }
