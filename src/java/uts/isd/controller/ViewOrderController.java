@@ -22,7 +22,7 @@ import uts.isd.model.dao.DBManager;
 
 /**
  *
- * @author mapso
+ * @author soleane
  */
 public class ViewOrderController extends HttpServlet {
 
