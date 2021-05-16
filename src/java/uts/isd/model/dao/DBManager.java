@@ -118,6 +118,7 @@ public class DBManager {
            String userEmail = rs.getString(1);
            String userPass = rs.getString(3);
            if (userEmail.equals(email) && userPass.equals(password)) {
+               //irrelevant comment
                return true;
            }
        }
