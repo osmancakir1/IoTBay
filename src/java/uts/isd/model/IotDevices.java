@@ -1,56 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package uts.isd.model;
 
-/**
- *
- * @author mapso
- */
-public class IotDevices {
-
-    private int deviceId;
-    private String deviceName;
-    private int numberInStock;
-
-    public int getDeviceId() {
-        return deviceId;
+public class Device {
+    private String name;
+    private String type;
+    private double price;
+    private int quantity;
+    
+    public Device(String name, String type, double price, int quantity){
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.quantity = quantity;
     }
 
-    public void setDeviceId(int deviceId) {
-        this.deviceId = deviceId;
+    public String getName() {
+        return name;
     }
 
-    public String getDeviceName() {
-        return deviceName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setDeviceName(String deviceName) {
-        this.deviceName = deviceName;
+    public String getType() {
+        return type;
     }
 
-    public int getNumberInStock() {
-        return numberInStock;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setNumberInStock(int deviceType) {
-        this.numberInStock = deviceType;
+    public double getPrice() {
+        return price;
     }
 
-    public IotDevices() {
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public IotDevices(int deviceId, String deviceName, int deviceType) {
-        this.deviceId = deviceId;
-        this.deviceName = deviceName;
-        this.numberInStock = deviceType;
+    public int getQuantity() {
+        return quantity;
     }
 
-    @Override
-    public String toString() {
-        return "IotDevices{" + "deviceId=" + deviceId + ", deviceName=" + deviceName + ", deviceType=" + numberInStock + '}';
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
     
     
