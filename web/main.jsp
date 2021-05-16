@@ -21,7 +21,7 @@
             <li style="float:right"><a href="logout.jsp">Logout</a></li>
         </ul> 
          
-        <p> You are logged in as ${user.getName()} < ${user.getEmail()} > </p>
+        <p style="color: #c29100;"><i> You are logged in as &lt ${user.email} &gt </i></p>
         <% } else { %>
         <h1>Welcome to IOTBay</h1>
         <a class="button" href="register.jsp">Sign up</a>

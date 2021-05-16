@@ -85,7 +85,7 @@ public class DBManager {
 
 
     //update a user details in the database   
-    public void updateUser( String email, String name, String password, String phone) throws SQLException {       
+    public void updateUser(String email, String name, String password, String phone) throws SQLException {       
        st.executeUpdate("UPDATE ISDUSER.USERS SET NAME='" + name + "', PASSWORD='" + password + "', PHONE='" + phone + "' WHERE EMAIL='" + email + "'");   
 
     }       

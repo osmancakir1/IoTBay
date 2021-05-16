@@ -9,25 +9,64 @@
         <title>Registration Page</title>
     </head>
     <body>
-        <%
-            String existErr = (String) session.getAttribute("existErr");
-            String emailErr = (String) session.getAttribute("emailErr");
-            String passErr = (String) session.getAttribute("passErr");
-            String nameErr = (String) session.getAttribute("nameErr");
-            String phoneErr = (String) session.getAttribute("phoneErr");
-        %>
         <h1>Sign Up Form</h1>
         <form method="post" action="RegisterServlet">
             <table>
-                <tr><td>Email: </td><td><input type = "email" placeholder="<%=(emailErr != null ? emailErr : "Enter your email")%>" name ="email" required ></td></tr>
-                <tr><td>Name: </td><td><input type = "text" placeholder="<%=(nameErr != null ? nameErr : "Enter first name")%>" name = "name" required = "true"></td></tr>
-                <tr><td>Password: </td><td><input type = "password" placeholder="<%=(passErr != null ? passErr : "Enter your password")%>" name = "password" required = "true"></td></tr>
-                <tr><td>Phone: </td><td><input type = "text" placeholder="<%=(phoneErr != null ? phoneErr : "Enter phone number")%>" name = "phone" required = "true"></td></tr>
-         
+                <tr>
+                    <td><label for="email">Email:</label></td>
+                    <td><input type="text" name="email" placeholder="email@email.com" required>
+                        <%
+                            if (session.getAttribute("emailErr") != null) {
+                        %>
+                        <div><span><%=session.getAttribute("emailErr")%></span></div>
+
+                        <% }
+                        %></td>
+                </tr>
+                <tr>
+                    <td><label for="name">Full Name:</label></td>
+                    <td><input type="text" name="name" placeholder="John Smith" required>
+                        <%
+                            if (session.getAttribute("nameErr") != null) {
+                        %>
+                        <div><span><%=session.getAttribute("nameErr")%></span></div>
+
+                        <% }
+                        %></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password:</label></td>
+                    <td><input type="text" name="password" placeholder="password" required>
+                        <%
+                            if (session.getAttribute("passErr") != null) {
+                        %>
+                        <div><span><%=session.getAttribute("passErr")%></span></div>
+
+                        <% }
+                        %></td>
+                </tr>
+                <tr>
+                    <td><label for="phone">Phone No:</label></td>
+                    <td><input type="text" name="phone" placeholder="1234 567 890" required>
+                        <%
+                            if (session.getAttribute("phoneErr") != null) {
+                        %>
+                        <div><span><%=session.getAttribute("phoneErr")%></span></div>
+
+                        <% }
+                        %></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><center>
+                    <button class="button" href = "main.jsp"> Cancel</button>
+                    <input class="button" type = "submit" value = "Register">
+                </center>
+                </td>
+                </tr>
             </table>
             <div>
-                <button class="button" href = "main.jsp"> Cancel</button>
-                <input class="button" type = "submit" value = "Register">
+
             </div>
         </form>
 </body>
