@@ -36,7 +36,7 @@ public class DBManager {
                 String userName = rs.getString(2);
                 String userPhone = rs.getString(4);
                 
-                return new User (userName, userEmail, userPass, userPhone );
+                return new User(userEmail, userName, userPass, userPhone);
             }
         }
 

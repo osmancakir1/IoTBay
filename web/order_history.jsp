@@ -14,6 +14,6 @@
             User user = (User)session.getAttribute("user");
         %>
         
-        <h1>${user.username}'s Order History</h1>
+        <h1>${user.getName()}'s Order History</h1>
     </body>
 </html>

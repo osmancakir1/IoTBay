@@ -14,17 +14,19 @@
             User user = (User)session.getAttribute("user");
         %>
         
-        <h1>${user.username}'s Account</h1>
-        <tr><td><input class="button" type="submit" value="Update"></td></tr> 
+        <h1>${user.getName()}'s Account</h1>
         <tr><td><a href="main.jsp" class="button">Back</a></td></tr>
         <h2>Account Details</h2>
         <button class="button" onclick="accountDetails()">Click to show/hide Account Details</button>
         <div id="accountDetails">
             <form method="post" action="edit_user.jsp">
                 <table> 
-                    <tr><td>Username:</td><td><input type="text" name="username" value="${user.username}"></td></tr>
-                    <tr><td>Email:</td><td><input type="text" name="email" value="${user.email}"></td></tr>
-                    <tr><td>Password:</td><td><input type="text" name="password" value="${user.password}"></td></tr>
+                    <tr><td>Name:</td><td><input type="text" name="name" placeholder="${user.name}"></td></tr>
+                    <tr><td>Email:</td><td><input type="text" name="email" placeholder="${user.email}"></td></tr>
+                    <tr><td>Password:</td><td><input type="text" name="password" placeholder="${user.password}"></td></tr>
+                    <tr><td>Phone</td><td><input type="text" name="phone" placeholder="${user.phone}"></td></tr>
+                    <tr><td><input class="button" type="submit" value="Update"></td></tr> 
+
                 </table>
             </form>
         </div>
@@ -33,10 +35,12 @@
         <div id="paymentDetails">
             <form method="post" action="edit_user.jsp">
                 <table> 
-                    <tr><td>Name on Card:</td><td><input type="text" name="cardName" <!--value="${user.username}"-->></td></tr>
-                    <tr><td>Card Number:</td><td><input type="number" name="cardNo" maxlength="16" <!--value="${user.username}"-->></td></tr>
+                    <tr><td>Name on Card:</td><td><input type="text" name="cardName" <!--value="${user.name}"-->></td></tr>
+                    <tr><td>Card Number:</td><td><input type="number" name="cardNo" maxlength="16" <!--value="${user.name}"-->></td></tr>
                     <tr><td>CVV:</td><td><input type="number" name="CardCVV" maxlength="3" <!--value="${user.email}"-->></td></tr>
                     <tr><td>Expiry:</td><td><input type="month" name="cardExpiry" <!--value="${user.password}"-->></td></tr>
+                    <tr><td><input class="button" type="submit" value="Update"></td></tr> 
+
                 </table>
             </form>
         </div>
@@ -61,10 +65,11 @@
         }
         </script>
         <%
-            String username = request.getParameter("username");
+            String name = request.getParameter("name");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            user = new User(email,username,password);
+            String phone = request.getParameter("phone");
+            user = new User(email, name, password,phone);
             session.setAttribute("user", user);
         %>
     </body>
