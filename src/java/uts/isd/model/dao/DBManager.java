@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import uts.isd.model.Payment;
 
 /* 
 * DBManager is the primary DAO class to interact with the database. 
@@ -42,47 +43,12 @@ public class DBManager {
 
         return null; 
     }
-    //public Staff findStaff(String userID) throws SQLException{
-    //    String sql = "select * from staff where \"userid\"="+userID;
-    //    ResultSet rs=st.executeQuery(sql);
-    //    Staff staff = null;
-    //    if(rs.next()){
-    //        staff = new Staff(rs.getString(1), rs.getString(2), rs.getString(3)
-    //        , rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
-    //    }
-    //    return staff;
-    //}
-    //public void addStaff(String email, String password, String firstname, 
-    //        String lastname, String othernames, String role) throws SQLException{
-    //    String sql = "select max(\"staffid\") from staff";
-    //    int staffID = 99999;
-    //    int userID = 99999;
-    //    ResultSet rs = st.executeQuery(sql);
-    //    if(rs.next()){
-    //        staffID = Integer.parseInt(rs.getString(1));
-    //    }
-    //    sql ="select max(\"userid\") from users";
-    //    rs = st.executeQuery(sql);
-    //    if(rs.next()){
-    //        userID = Integer.parseInt(rs.getString(1));
-    //    }
-    //    userID += 1;
-    //        sql = "insert into users (\"userid\", \"email\", \"password\") \nvalues ("
-    //                +userID+", \'"
-    //                +email+"\', \'"+password+"\')";
-    //        st.executeUpdate(sql);
-    //    staffID += 1;
-    //        sql = "insert into staff (\"staffid\", \"userid\", \"firstname\", \"lastname\", \"othernames\", \"role\", \"email\")\nvalues("
-    //                +staffID+", "+userID+", \'"+ firstname+ "\', \'"+lastname+"\', \'"+othernames+"\', \'"+role+"\', \'"+email+"\')";
-    //        st.executeUpdate(sql);
-    //}
 
     //Add a user-data into the database   
     public void addUser(String email, String name, String password, String phone) throws SQLException {
         st.executeUpdate("INSERT INTO ISDUSER.USERS " + "VALUES ('" + email + "', '" + name + "', '" + password + "', '" + phone + "')"); 
 
     }
-
 
     //update a user details in the database   
     public void updateUser(String email, String name, String password, String phone) throws SQLException {       
@@ -124,4 +90,24 @@ public class DBManager {
        }
        return false;
    }
+    
+    public void addPayment(String cardNumber, String cardExpiry, String cardCVC, String userEmail) throws SQLException {
+        st.executeUpdate("INSERT INTO ISDUSER.PAYMENT (cardNumber, cardExpiry, cardCVC, userEmail) VALUES ('" + cardNumber + "', '" + cardExpiry + "', '" + cardCVC + "'," + userEmail + ")");
+    }
+    
+    public void updatePayment(String cardNumber, String newCardNumber, String newExpiry, String newCVC) throws SQLException {
+        st.executeUpdate("UPDATE ISDUSER.PAYMENT SET cardNumber='" + newCardNumber + "', cardExpiry='" + newExpiry + "', cardCVC='" + newCVC + ", WHERE creditCardNumber='" + cardNumber + "'");
+    }
+    
+    public void deletePayment(String cardNumber) throws SQLException {
+        st.execute("DELETE FROM ISDUSER.PAYMENT WHERE cardNumber='" + cardNumber + "'");
+    }
+    public Payment getPayment(String cardNumber, String userEmail) throws SQLException {
+        try {
+            ResultSet rs = st.executeQuery("SELECT * FROM ISDUSER.PAYMENT WHERE cardNumber='" + cardNumber + "'");
+            return new Payment(rs.getString("cardNumber"), rs.getString("cardExpiry"), rs.getString("cardCVC"), rs.getString("userEmail"));
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 }

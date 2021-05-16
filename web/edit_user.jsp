@@ -67,40 +67,6 @@
                 </table>
             </form>
         </div>
-        <h2>Payment Details</h2>
-        <button class="button" onclick="paymentDetails()">Click to show/hide Payment Details</button>
-        <div id="paymentDetails">
-            <form method="post" action="EditServlet">
-                <table> 
-                    <tr><td>Name on Card:</td><td><input type="text" name="cardName" <!--value="${user.name}"-->></td></tr>
-                    <tr><td>Card Number:</td><td><input type="number" name="cardNo" maxlength="16" <!--value="${user.name}"-->></td></tr>
-                    <tr><td>CVV:</td><td><input type="number" name="CardCVV" maxlength="3" <!--value="${user.email}"-->></td></tr>
-                    <tr><td>Expiry:</td><td><input type="month" name="cardExpiry" <!--value="${user.password}"-->></td></tr>
-                    <tr><td><input class="button" type="submit" value="Update"></td></tr> 
-
-                </table>
-            </form>
-        </div>
-        <script>
-        function accountDetails() {
-          var x = document.getElementById("accountDetails");
-          if (x.style.display === "none") {
-            x.style.display = "block";
-          } else {
-            x.style.display = "none";
-          }
-        }
-        </script>
-        <script>
-        function paymentDetails() {
-          var x = document.getElementById("paymentDetails");
-          if (x.style.display === "none") {
-            x.style.display = "block";
-          } else {
-            x.style.display = "none";
-          }
-        }
-        </script>
         <%
             user = new User(email, name, password,phone);
             session.setAttribute("user", user);

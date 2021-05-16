@@ -44,6 +44,15 @@
         <url-pattern>/EditServlet</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>AddPaymentServlet</servlet-name>
+        <servlet-class>uts.isd.controller.AddPaymentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddPaymentServlet</servlet-name>
+        <url-pattern>/AddPaymentServlet</url-pattern>
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

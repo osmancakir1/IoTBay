@@ -15,6 +15,9 @@
    private String namePattern = "([A-Z][a-z]+[\\s])+[A-Z][a-z]*";       
    private String passwordPattern = "[a-zA-Z0-9]{4,20}";      
    private String phonePattern = "([0-9]{10})";
+    private String cardNumberPattern = "([0-9]{16})";
+    private String cardExpiryPattern = "([0-1]{1})([0-9]{1})(/)([2-9]{1})([0-9]{1})";
+    private String cardCVCPattern = "([0-9]{3})";
    
    public Validator(){    }       
    public boolean validate(String pattern, String input){       
@@ -44,8 +47,20 @@
    
     public boolean validatePhone(String phone){
       return validate(phonePattern,phone); 
-   }     
-   
+   }   
+    
+    public boolean validateCardNumber(String creditCardNumber) {
+        return validate(cardNumberPattern, creditCardNumber);
+    }
+
+    public boolean validateCardExpiry(String creditCardExpiry) {
+        return validate(cardExpiryPattern, creditCardExpiry);
+    }
+
+    public boolean validateCardCVC(String creditCardCVC) {
+        return validate(cardCVCPattern, creditCardCVC);
+    }
+
    public void clear(HttpSession session){
        session.setAttribute("emailErr", "");
        session.setAttribute("passErr", "");

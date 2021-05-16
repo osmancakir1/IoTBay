@@ -16,7 +16,8 @@
                 User user = (User)session.getAttribute("user");
         %>
         <ul>
-            <li><a href="edit_user.jsp">My Account</a></li>
+            <li><a href="edit_user.jsp">My Account Details</a></li>
+            <li><a href="paymentDetails.jsp">My Payment Details</a></li>
             <li><a href="order_history.jsp">View Order History</a></li>
             <li style="float:right"><a href="logout.jsp">Logout</a></li>
         </ul> 
